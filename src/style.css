@@ -48,16 +48,16 @@ label {
     cursor: pointer;
 }
 
-button[type="submit"] {
+input {
+    border-radius: 8px;
+    padding: 0.5rem 0.25rem;
+}
+
+.submit-btn {
     margin-top: 2rem;
     align-self: center;
     padding: 1em 2.5em;
     border-radius: 12px;
-}
-
-input {
-    border-radius: 8px;
-    padding: 0.5rem 0.25rem;
 }
 
 /* validation styling */
