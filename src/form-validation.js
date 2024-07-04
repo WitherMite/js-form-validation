@@ -6,7 +6,7 @@ const emailRegEx = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 function checkAnyFieldsInvalid(fields) {
   let isInvalid = false;
   fields.forEach((field) => {
-    isInvalid = checkFieldInvalid(field);
+    if (checkFieldInvalid(field)) isInvalid = true;
   });
   return isInvalid;
 }
