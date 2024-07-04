@@ -49,6 +49,8 @@ label {
 }
 
 input {
+    width: 27ch;
+    height: 2.5rem;
     border-radius: 8px;
     padding: 0.5rem 0.25rem;
 }
@@ -61,3 +63,13 @@ input {
 }
 
 /* validation styling */
+
+input:invalid {
+    box-sizing: border-box;
+    border: 2px solid red;
+}
+
+.error-msg {
+    align-self: center;
+    color: red;
+}
