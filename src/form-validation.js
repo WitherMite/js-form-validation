@@ -1,3 +1,5 @@
+import checkPasswordComplex from "./password-validation";
+
 // https://regexr.com/3e48o
 const emailRegEx = /^[\w-.]+@([\w-]+\.)+[\w-]{2,4}$/;
 
@@ -26,9 +28,18 @@ function checkFieldInvalid(field) {
     if (wrongPattern) return true;
   }
 
-  // test password complexity and match
+  if (field.input.id === "pwd" && checkPasswordComplex(field.input))
+    return true;
 
   return false;
+}
+
+function checkPasswordMismatch(p1, p2) {
+  reportCondition(
+    p2,
+    p1.input.value !== p2.input.value,
+    "Passwords must match"
+  );
 }
 
 function reportCondition(field, condition, errMsg) {
@@ -42,4 +53,4 @@ function reportCondition(field, condition, errMsg) {
   return condition;
 }
 
-export { checkAnyFieldsInvalid, checkFieldInvalid };
+export { checkAnyFieldsInvalid, checkFieldInvalid, checkPasswordMismatch };

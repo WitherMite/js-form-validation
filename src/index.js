@@ -1,5 +1,9 @@
 import "./style.css";
-import { checkAnyFieldsInvalid, checkFieldInvalid } from "./form-validation";
+import {
+  checkAnyFieldsInvalid,
+  checkFieldInvalid,
+  checkPasswordMismatch,
+} from "./form-validation";
 
 const form = document.forms[0];
 const email = createField("email", "email-err");
@@ -15,8 +19,15 @@ fields.forEach((field) => {
   });
 });
 
+confirmPass.input.addEventListener("blur", () =>
+  checkPasswordMismatch(password, confirmPass)
+);
+
 form.addEventListener("submit", (e) => {
-  if (checkAnyFieldsInvalid(fields)) {
+  if (
+    checkAnyFieldsInvalid(fields) ||
+    checkPasswordMismatch(password, confirmPass)
+  ) {
     e.preventDefault();
   } else {
     alert("Form submitted!");
