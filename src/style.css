@@ -66,6 +66,10 @@ li {
     margin-left: 1.25rem;
 }
 
+.disclaimer {
+    margin-top: 3rem;
+}
+
 /* validation styling */
 
 input:invalid {
