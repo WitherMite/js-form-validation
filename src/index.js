@@ -25,6 +25,12 @@ password.input.addEventListener("input", () => {
   checkPasswordWeak(password);
 });
 
+password.input.addEventListener("blur", () => {
+  if (confirmPass.input.value) {
+    checkFieldInvalid(confirmPass);
+  }
+});
+
 form.addEventListener("submit", (e) => {
   if (checkAnyFieldsInvalid(fields)) {
     e.preventDefault();

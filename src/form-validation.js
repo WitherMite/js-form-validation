@@ -44,21 +44,6 @@ function checkFieldInvalid(field) {
   return false;
 }
 
-function checkPasswordWeak(field) {
-  const password = field.input.value;
-  let isWeak = false;
-  if (password.length < minPwdLength) {
-    isWeak = true;
-    field.error.textContent = "Password should be at least 8 characters";
-  }
-  // more conditions after changing password's error span to have a list
-  if (!isWeak) {
-    field.error.textContent = "";
-    field.input.setCustomValidity("");
-  }
-  return isWeak;
-}
-
 function reportCondition(field, condition, errMsg) {
   if (condition) {
     field.error.textContent = errMsg;
@@ -68,6 +53,45 @@ function reportCondition(field, condition, errMsg) {
     field.input.setCustomValidity("");
   }
   return condition;
+}
+
+function checkPasswordWeak(field) {
+  const password = field.input.value;
+  const error = field.error;
+  let isWeak = false;
+  field.error.textContent = "Password Needs:";
+  if (password.length < minPwdLength) {
+    isWeak = true;
+    error.append(createReq("minimum 8 characters"));
+  }
+  if (!/[A-Z]/.test(password)) {
+    isWeak = true;
+
+    error.append(createReq("at least one capital"));
+  }
+  if (!/[a-z]/.test(password)) {
+    isWeak = true;
+    error.append(createReq("at least one lowercase"));
+  }
+  if (!/\d/.test(password)) {
+    isWeak = true;
+    error.append(createReq("at least one number"));
+  }
+  if (!/[^A-z 0-9]/.test(password)) {
+    isWeak = true;
+    error.append(createReq("at least one special character"));
+  }
+  if (!isWeak) {
+    error.textContent = "";
+    field.input.setCustomValidity("");
+  }
+  return isWeak;
+
+  function createReq(message) {
+    const requirement = document.createElement("li");
+    requirement.textContent = message;
+    return requirement;
+  }
 }
 
 export { checkAnyFieldsInvalid, checkFieldInvalid, checkPasswordWeak };

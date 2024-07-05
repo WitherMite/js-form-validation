@@ -62,6 +62,10 @@ input {
     border-radius: 12px;
 }
 
+li {
+    margin-left: 1.25rem;
+}
+
 /* validation styling */
 
 input:invalid {
