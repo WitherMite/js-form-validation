@@ -65,11 +65,15 @@ input {
 /* validation styling */
 
 input:invalid {
-    box-sizing: border-box;
-    border: 2px solid red;
+    border-left: 2px solid red;
+    border-right: 2px solid red;
+}
+
+input:invalid:focus {
+    border-color: transparent;
 }
 
 .error-msg {
-    align-self: center;
-    color: red;
+    width: 300px;
+    align-self: flex-end;
 }

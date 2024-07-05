@@ -2,7 +2,7 @@ import "./style.css";
 import {
   checkAnyFieldsInvalid,
   checkFieldInvalid,
-  checkPasswordMismatch,
+  checkPasswordWeak,
 } from "./form-validation";
 
 const form = document.forms[0];
@@ -13,21 +13,20 @@ const password = createField("pwd", "pwd-err");
 const confirmPass = createField("pwd-conf", "pwd-conf-err");
 const fields = [email, country, zipCode, password, confirmPass];
 
+confirmPass.pairedPwd = password;
+
 fields.forEach((field) => {
   field.input.addEventListener("blur", () => {
     checkFieldInvalid(field);
   });
 });
 
-confirmPass.input.addEventListener("blur", () =>
-  checkPasswordMismatch(password, confirmPass)
-);
+password.input.addEventListener("input", () => {
+  checkPasswordWeak(password);
+});
 
 form.addEventListener("submit", (e) => {
-  if (
-    checkAnyFieldsInvalid(fields) ||
-    checkPasswordMismatch(password, confirmPass)
-  ) {
+  if (checkAnyFieldsInvalid(fields)) {
     e.preventDefault();
   } else {
     alert("Form submitted!");
